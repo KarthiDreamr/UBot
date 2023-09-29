@@ -1,0 +1,3 @@
+# Project exclude paths
+/ubot/.dart_tool/
+/ubot/build/
