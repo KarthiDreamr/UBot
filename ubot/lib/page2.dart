@@ -11,32 +11,52 @@ class Page2 extends StatelessWidget {
     return const Column(
       children: [
         Padding(
-          padding: EdgeInsets.only(
-            top: 34,
-            right: 2
-          ),
+          padding: EdgeInsets.only(top: 34, right: 2),
           child: CustomBarChart(),
-              // VerticalChart()
+          // VerticalChart()
         ),
         Expanded(
           child: SingleChildScrollView(
             child: Column(
               children: [
                 CustomCardText(
-                    textValue: "\n- A new persistent urge to urinate"
-                        "\n- Bloody or pink-colored urine "
-                        "\n- Cloudy or foul-smelling urine"
-                        "\n- Pain or burning when urinating"
-                        "\n- Pain in your back, side or groin",
-                    headingValue: "Symptoms",
-                    isTop: true
-                ),
+                    textValue: "\n\u2756 Corrosion"
+                        "\n\u2756 cavitation "
+                        "\n\u2756 erosion"
+                        "\n\u2756 fatigue"
+                        "\n\u2756 material defect due to aging"
+                        "\n\u2756 Excession vibration of the turbines"
+                        "\n\u2756 abrasion",
+                    headingValue: "Problems",
+                    isTop: true),
                 CustomCardText(
-                    textValue: "\n- Contact your doctor soon after symptoms"
-                        "\n- Take antibiotics to treat urinary tract infections"
-                        "\n- Drink water to prevent dehydration"
-                        "\n- Use a heating pad to relieve pain ",
-                    headingValue: "Recommendations"),
+                    textValue: "\n\u2756 Water pressure, water flow"
+                        "\n\u2756 Salinity "
+                        "\n\u2756 Cloudy or foul-smelling urine"
+                        "\n\u2756 Chemicals present in the water"
+                        "\n\u2756 biofouling (accumulation of the marine life on structures)"
+                        "\n\u2756 Temperature of the water"
+                        "\n\u2756 water levels",
+                    headingValue: "Environmental conditions",
+                    isTop: true),
+
+                /*
+                *Problems:
+1.	Corrosion
+2.	cavitation
+3.	erosion
+4.	fatigue
+5.	material defect due to aging, Excession vibration of the turbines
+6.	abrasion
+Environmental conditions:
+1.	Water pressure, water flow
+2.	Salinity
+3.	Chemicals present in the water
+4.	biofouling (accumulation of the marine life on structures)
+5.	Temperature of the water
+6.	water levels
+7.	habitants
+                * */
               ],
             ),
           ),
@@ -53,45 +73,30 @@ class _BarChart extends StatelessWidget {
   Widget build(BuildContext context) {
     return BarChart(
       BarChartData(
-        barTouchData: barTouchData,
+        // barTouchData: barTouchData,
         titlesData: titlesData,
         borderData: borderData,
         barGroups: barGroups,
-        gridData: const FlGridData(show: false),
+        // gridData: gridData,
         alignment: BarChartAlignment.spaceAround,
         maxY: 100,
+        minY: 0,
       ),
     );
   }
 
-  BarTouchData get barTouchData => BarTouchData(
-        enabled: false,
-        touchTooltipData: BarTouchTooltipData(
-          tooltipBgColor: Colors.transparent,
-          tooltipPadding: EdgeInsets.zero,
-          tooltipMargin: 8,
-          getTooltipItem: (
-            BarChartGroupData group,
-            int groupIndex,
-            BarChartRodData rod,
-            int rodIndex,
-          ) {
-            return BarTooltipItem(
-              rod.toY.round().toString(),
-              const TextStyle(
-                color: Colors.cyan,
-                fontWeight: FontWeight.bold,
-              ),
-            );
-          },
-        ),
-      );
+  FlBorderData get borderData => FlBorderData(
+    border: const Border(
+      left: BorderSide(color: Colors.black, width: 1),
+      bottom: BorderSide(color: Colors.black, width: 1),
+    ),
+  );
 
   Widget getTitles(double value, TitleMeta meta) {
     const style = TextStyle(
       color: Colors.blue,
       fontWeight: FontWeight.bold,
-      fontSize: 14,
+      fontSize: 13.5,
     );
     String text;
     switch (value.toInt()) {
@@ -110,6 +115,12 @@ class _BarChart extends StatelessWidget {
       case 4:
         text = 'Density';
         break;
+      case 5:
+        text = 'Death';
+        break;
+      case 6:
+        text = 'Mental';
+        break;
       default:
         text = '';
         break;
@@ -122,97 +133,118 @@ class _BarChart extends StatelessWidget {
   }
 
   FlTitlesData get titlesData => FlTitlesData(
-        show: true,
-        bottomTitles: AxisTitles(
-          sideTitles: SideTitles(
-            showTitles: true,
-            reservedSize: 30,
-            getTitlesWidget: getTitles,
-          ),
-        ),
-        leftTitles: const AxisTitles(
-          sideTitles: SideTitles(showTitles: false),
-        ),
-        topTitles: const AxisTitles(
-          sideTitles: SideTitles(showTitles: false),
-        ),
-        rightTitles: const AxisTitles(
-          sideTitles: SideTitles(showTitles: false),
-        ),
-      );
+    show: true,
+    bottomTitles: AxisTitles(
+      sideTitles: SideTitles(
+        showTitles: true,
+        reservedSize: 30,
+        getTitlesWidget: getTitles,
 
-  FlBorderData get borderData => FlBorderData(
-        show: false,
-      );
+      ),
+    ),
+    leftTitles: const AxisTitles(
+      sideTitles: SideTitles(
+          showTitles: true,
+          reservedSize: 35,
+          interval: 25
+      ),
+    ),
+    topTitles: const AxisTitles(
+      sideTitles: SideTitles(showTitles: false),
+    ),
+    rightTitles: const AxisTitles(
+      sideTitles: SideTitles(showTitles: false),
+    ),
+  );
+
+  //
+  // LinearGradient get _barsGradient => const LinearGradient(
+  //       colors: [
+  //         Colors.red,
+  //         Colors.orange,
+  //         Colors.green,
+  //       ],
+  //       begin: Alignment.bottomCenter,
+  //       end: Alignment.topCenter,
+  //     );
+
 
   LinearGradient get _barsGradient => const LinearGradient(
-        colors: [
-          Colors.red,
-          Colors.orange,
-          Colors.green,
-        ],
-        begin: Alignment.bottomCenter,
-        end: Alignment.topCenter,
-      );
-
-  //       _ChartData('PH', 70),
-//       _ChartData('Hydration', 96),
-//       _ChartData('Color', 85),
-//       _ChartData('Health', 79),
-//       _ChartData('Density', 90)
+    colors: [
+      Colors.red,
+      Colors.orange,
+      Colors.green,
+    ],
+    begin: Alignment.bottomCenter,
+    end: Alignment.topCenter,
+  );
 
   List<BarChartGroupData> get barGroups => [
-        BarChartGroupData(
-          x: 0,
-          barRods: [
-            BarChartRodData(
-              toY: 70,
-              gradient: _barsGradient,
-            )
-          ],
-          showingTooltipIndicators: [0],
-        ),
-        BarChartGroupData(
-          x: 1,
-          barRods: [
-            BarChartRodData(
-              toY: 96,
-              gradient: _barsGradient,
-            )
-          ],
-          showingTooltipIndicators: [0],
-        ),
-        BarChartGroupData(
-          x: 2,
-          barRods: [
-            BarChartRodData(
-              toY: 85,
-              gradient: _barsGradient,
-            )
-          ],
-          showingTooltipIndicators: [0],
-        ),
-        BarChartGroupData(
-          x: 3,
-          barRods: [
-            BarChartRodData(
-              toY: 79,
-              gradient: _barsGradient,
-            )
-          ],
-          showingTooltipIndicators: [0],
-        ),
+
+    BarChartGroupData(
+      x: 0,
+      barRods: [
+        BarChartRodData(
+          toY: 70,
+          gradient: const LinearGradient(
+            colors: [
+              Colors.red,
+              Colors.orange,
+              Colors.green,
+            ],
+            begin: Alignment.bottomCenter,
+            end: Alignment.topCenter,
+          ),
+        )
+      ],
+    ),
+    BarChartGroupData(
+      x: 1,
+      barRods: [
+        BarChartRodData(
+          toY: 96,
+          gradient: _barsGradient,
+        )
+      ],
+    ),
+    BarChartGroupData(
+      x: 2,
+      barRods: [
+        BarChartRodData(
+          toY: 85,
+          gradient: _barsGradient,
+        )
+      ],
+    ),
+    BarChartGroupData(
+      x: 3,
+      barRods: [
+        BarChartRodData(
+          toY: 79,
+          gradient: _barsGradient,
+        )
+      ],
+    ),
     BarChartGroupData(
       x: 4,
       barRods: [
         BarChartRodData(
-          toY: 90,
+          toY: 100,
           gradient: _barsGradient,
         )
       ],
-      showingTooltipIndicators: [0],
     ),
-      ];
+    BarChartGroupData(
+      x: 3,
+      barRods: [
+        BarChartRodData(
+          toY: 79,
+          gradient: _barsGradient,
+        )
+      ],
+    ),
+
+  ];
 }
 
 class CustomBarChart extends StatefulWidget {
@@ -226,80 +258,8 @@ class CustomBarChartState extends State<CustomBarChart> {
   @override
   Widget build(BuildContext context) {
     return const AspectRatio(
-      aspectRatio: 1.6,
+      aspectRatio: 1.4,
       child: _BarChart(),
     );
   }
 }
-
-// class VerticalChart extends StatefulWidget {
-//   const VerticalChart({Key? key}) : super(key: key);
-//
-//   @override
-//   State<VerticalChart> createState() => _VerticalChartState();
-// }
-//
-// class _VerticalChartState extends State<VerticalChart> {
-//   late List<_ChartData> data;
-//   late TooltipBehavior _tooltip;
-//
-//   @override
-//   void initState() {
-//     data = [
-//       _ChartData('PH', 70),
-//       _ChartData('Hydration', 96),
-//       _ChartData('Color', 85),
-//       _ChartData('Health', 79),
-//       _ChartData('Density', 90)
-//     ];
-//     _tooltip = TooltipBehavior(enable: true);
-//     super.initState();
-//   }
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: const Text('Health Chart'),
-//       ),
-//       body: SfCartesianChart(
-//         palette: const [
-//           Colors.green,
-//           Colors.yellow,
-//           Colors.red,
-//           Colors.blue,
-//           Colors.purple
-//         ],
-//         primaryXAxis: CategoryAxis(
-//           // isVisible: false,
-//         ),
-//         primaryYAxis: NumericAxis(
-//           isVisible: false,
-//           minimum: 0,
-//           maximum: 100,
-//           interval: 20,
-//         ),
-//         tooltipBehavior: _tooltip,
-//         series: <ChartSeries<_ChartData, String>>[
-//           ColumnSeries<_ChartData, String>(
-//               dataSource: data,
-//               xValueMapper: (_ChartData data, _) => data.x,
-//               yValueMapper: (_ChartData data, _) => data.y,
-//               name: 'Gold',
-//               // color: const Color.fromRGBO(8, 142, 255, 1),
-//             gradient: const LinearGradient(
-//               colors: [Colors.red,Colors.yellow,Colors.green]
-//             )
-//           )
-//         ],
-//       ),
-//     );
-//   }
-// }
-//
-// class _ChartData {
-//   _ChartData(this.x, this.y);
-//
-//   final String x;
-//   final double y;
-// }
